@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app # Mount the app directory for live reload
+    environment:
+      # Environment variables can be set here if needed
+      # EXAMPLE_VAR: example_value
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload # Use --reload for development

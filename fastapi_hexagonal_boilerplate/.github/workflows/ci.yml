@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ] # Or your default branch
+  pull_request:
+    branches: [ main ] # Or your default branch
+
+jobs:
+  lint-and-format-check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9' # Should match pyproject.toml
+
+    - name: Install Poetry
+      run: |
+        pip install poetry
+        poetry config virtualenvs.create false --local # Optional: install in system site-packages
+
+    - name: Install dependencies
+      run: poetry install --no-interaction --no-root # --no-root if the project itself is not a library to be installed
+
+    - name: Run Ruff linter
+      run: poetry run ruff check .
+
+    - name: Run Ruff formatter check
+      run: poetry run ruff format --check .
