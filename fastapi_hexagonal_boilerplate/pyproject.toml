@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "fastapi-hexagonal-boilerplate"
+version = "0.1.0"
+description = "A boilerplate project for FastAPI with Hexagonal Architecture."
+authors = ["Your Name <you@example.com>"] # You can change this
+readme = "README.md" # We will create this later
+packages = [{include = "app", from = "."}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.110.0"
+uvicorn = {extras = ["standard"], version = "^0.27.1"}
+ruff = "^0.3.2" # Added ruff
+    slowapi = "^0.1.9" # Added slowapi
+    pybreaker = "^1.0.0" # Added pybreaker
+
+[tool.poetry.group.dev.dependencies]
+# Placeholder for dev dependencies like pytest
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+# Ruff configuration
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "I", "UP", "S", "C4", "B", "A", "RUF"] # Common selections
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
